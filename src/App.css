@@ -30,20 +30,44 @@ Things like: Page layout (header, sidebar, main content styles).
   --white: #FFFFFF;
 
 }
-
+/* LAYOUT */
+.dashboard {
+  display: flex;
+  gap: var(--space-m);
+}
+.table-overview {
+  flex-grow: 1;
+}
 .table-grid {
   display: grid;
-  grid-template-columns: 1fr 1fr;
+  grid-template-columns: repeat(3, 1fr);
   gap: var(--space-m);
   margin-top: var(--space-s);
 }
-
 .table-card {
   border: var(--space-xs) solid var(--greyM);
   padding: var(--space-s);
   border-radius: var(--space-xs);
   text-align: center;
   transition: 0.3s;
+}
+
+
+/* 
+.next-reservation{
+  background-color: #7d7d7d;
+  text-align: center;
+} */
+
+.sidebar {
+  max-width: 20vw;
+  background: #f4f4f4;
+  padding-inline: 2rem;
+  padding-block: 1rem;
+}
+.reservation-card {
+  background-color: #ffa09d;
+  padding: var(--space-xs);
 }
 
 .free {

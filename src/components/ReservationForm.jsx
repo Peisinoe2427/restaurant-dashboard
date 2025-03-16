@@ -10,6 +10,11 @@ function ReservationForm({ tables, onClose, addReservation }) {
   const [selectedTable, setSelectedTable] = useState("");
   const [numPeople, setNumPeople] = useState(1);
 
+  if (!tables) {
+    console.error("Error: tables is undefined in ReservationForm");
+    return null; 
+  }
+
   const handleSubmit = (event) => {
     event.preventDefault();
     if (!name || !phone || !time || !selectedTable || numPeople < 1) {
@@ -58,13 +63,13 @@ function ReservationForm({ tables, onClose, addReservation }) {
                 <label>
                     Select Table:
                     <select value={selectedTable} onChange={(e) => setSelectedTable(e.target.value)} required>
-                    <option value="">-- Choose a Table --</option>
-                    {tables
+                      <option value="">-- Choose a Table --</option>
+                      {tables
                         .filter((table) => table.status === "free")
                         .map((table) => (
-                        <option key={table.id} value={table.id}>
+                          <option key={table.id} value={table.id}>
                             Table {table.id}
-                        </option>
+                          </option>
                         ))}
                     </select>
                 </label>

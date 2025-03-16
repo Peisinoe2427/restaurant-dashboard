@@ -1,43 +1,17 @@
 // Pre set tables with status and reservations
 
-const tablesData = [
-  {
-    id: 1,
-    status: "free", // "taken" or "reserved"
-    guests: 0,
-    reservation: null, // Stores reservation details if reserved
-    waiter: null, // Assigned waiter
-    beenHereSince: null, // Timestamp when seated
-  },
-  {
-    id: 2,
-    status: "reserved",
-    guests: 4,
-    reservation: {
-      name: "John Doe",
-      time: "19:00",
-      phone: "123-456-7890",
-      email: "john@example.com",
-    },
-    waiter: null,
-    beenHereSince: null,
-  },
-  {
-    id: 3,
-    status: "taken",
-    guests: 2,
-    reservation: null,
-    waiter: "Emily",
-    beenHereSince: "18:30",
-  },
-  {
-    id: 4,
-    status: "free",
-    guests: 0,
-    reservation: null,
-    waiter: null,
-    beenHereSince: null,
-  },
+const tablesData = Array.from({ length: 15 }, (_, index) => ({
+  id: index + 1,
+  status: "free", 
+  guests: 0,
+  waiter: null,
+  beenHereSince: null,
+  willBeFreeAt: null,
+}));
+
+const reservationsData = [
+  { id: 1, name: "John Doe", time: "19:00", guests: 4, phone: "123-456-7890", email: "john@example.com", assignedTable: null },
+  { id: 2, name: "Emma Smith", time: "20:30", guests: 2, phone: "987-654-3210", email: "emma@example.com", assignedTable: null },
 ];
 
-export default tablesData;
+export { tablesData, reservationsData };

@@ -72,6 +72,7 @@ a:hover {
   color: #0c7bba;
 }
 
+
 /* TYPO */
 body {
   color: var(--black);
@@ -83,18 +84,18 @@ h1 {
 }
 h2 {
   font-size: var(--fs-3);
-  padding-block-end: var(--space-s);
+  padding-block-end: var(--space-xs);
   color: var(--blue);
 }
 h3 {
   font-size: var(--fs-2);
-  padding-block-end: var(--space-xs);
+  padding-block-end: var(--space-xxs);
 }
 h4 {
   font-size: var(--fs-1);
 }
 p {
-  padding-block-end: var(--space-s);
+  padding-block-end: var(--space-xs);
 }
 
 
@@ -105,8 +106,8 @@ button {
   padding-inline: var(--space-s);
   border-style: none;
   font-weight: 800;
-  margin-inline-end: var(--space-xs);
-  margin-block-start: var(--space-xs);
+  margin-inline-end: var(--space-xxs);
+  margin-block-start: var(--space-xxs);
   max-width: fit-content;
 }
 .primary {
