@@ -1,42 +1,81 @@
-#root {
-  max-width: 1280px;
-  margin: 0 auto;
-  padding: 2rem;
+/* This should contain styles specific to the App component and overall layout. 
+Things like: Page layout (header, sidebar, main content styles).
+ Navigation bar styles. Container styling if needed. */
+
+:root {
+  --fs-03: clamp(0.5787rem, 0.5583rem + 0.0908vw, 0.64rem);
+  --fs-02: clamp(0.6944rem, 0.6593rem + 0.1564vw, 0.8rem);
+  --fs-01: clamp(0.8333rem, 0.7778rem + 0.2469vw, 1rem);
+  --fs-0: clamp(1rem, 0.9167rem + 0.3704vw, 1.25rem);
+  --fs-1: clamp(1.2rem, 1.0792rem + 0.537vw, 1.5625rem);
+  --fs-2: clamp(1.44rem, 1.269rem + 0.7602vw, 1.9531rem);
+  --fs-3: clamp(1.728rem, 1.4902rem + 1.0569vw, 2.4414rem);
+  --fs-4: clamp(2.0736rem, 1.7475rem + 1.4491vw, 3.0518rem);
+  --fs-5: clamp(2.4883rem, 2.0462rem + 1.965vw, 3.8147rem);
+
+  --space-xs: clamp(0.875rem, 0.8393rem + 0.1786vw, 1rem);
+  --space-s: clamp(1.125rem, 1.0714rem + 0.2679vw, 1.3125rem);
+  --space-m: clamp(1.6875rem, 1.5982rem + 0.4464vw, 2rem);
+  --space-l: clamp(2.25rem, 2.1429rem + 0.5357vw, 2.625rem);
+  --space-xl: clamp(3.375rem, 3.2143rem + 0.8036vw, 3.9375rem);
+  --space-2xl: clamp(4.5rem, 4.2857rem + 1.0714vw, 5.25rem);
+  --space-3xl: clamp(6.75rem, 6.4286rem + 1.6071vw, 7.875rem);
+
+  --blue: #0B93DC;
+  --darkBlue: #22334A;
+  --black: #232422;
+  --greyD: #E4E3E0;
+  --greyM: #F3F3F3;
+  --greyL: #f5f5f5;
+  --white: #FFFFFF;
+
+}
+
+.table-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: var(--space-m);
+  margin-top: var(--space-s);
+}
+
+.table-card {
+  border: var(--space-xs) solid var(--greyM);
+  padding: var(--space-s);
+  border-radius: var(--space-xs);
   text-align: center;
+  transition: 0.3s;
 }
 
-.logo {
-  height: 6em;
-  padding: 1.5em;
-  will-change: filter;
-  transition: filter 300ms;
-}
-.logo:hover {
-  filter: drop-shadow(0 0 2em #646cffaa);
-}
-.logo.react:hover {
-  filter: drop-shadow(0 0 2em #61dafbaa);
+.free {
+  background-color: #9fd8ac;
 }
 
-@keyframes logo-spin {
-  from {
-    transform: rotate(0deg);
-  }
-  to {
-    transform: rotate(360deg);
-  }
+.taken {
+  background-color: #ffa454;
 }
 
-@media (prefers-reduced-motion: no-preference) {
-  a:nth-of-type(2) .logo {
-    animation: logo-spin infinite 20s linear;
-  }
+.reserved {
+  background-color: #f89a9f;
 }
 
-.card {
-  padding: 2em;
+.modal {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(0, 0, 0, 0.5);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 1000;
 }
 
-.read-the-docs {
-  color: #888;
+.modal-content {
+  background: white;
+  padding: var(--space-s);
+  border-radius: var(--space-xs);
+  min-width: 80vw;
+  max-width: 80vh;
+  z-index: 1001;
 }
