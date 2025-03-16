@@ -3,10 +3,12 @@
 import React, { useState } from "react";
 import tablesData from "../data/tablesData";
 import TableDetails from "./TableDetail";
+import ReservationForm from "./ReservationForm"
 
 function TableOverview() {
   const [tables, setTables] = useState(tablesData);
   const [selectedTable, setSelectedTable] = useState(null);
+  const [showReservationForm, setShowReservationForm] = useState(false);
 
   const updateWaiter = (tableId, newWaiter)=>{
     setTables((prevTables) => {
@@ -24,17 +26,36 @@ function TableOverview() {
     );
   };
 
+  const addReservation = (tableId, reservationDetails) => {
+    setTables((prevTables) =>
+      prevTables.map((table) =>
+        table.id === tableId
+          ? { ...table, status: "reserved", reservation: reservationDetails, guests: reservationDetails.guests || 0, }
+          : table
+      )
+    );
+  };
+
   return (
     <div>
       <h2>Table Overview</h2>
+
+      <button onClick={() => setShowReservationForm(true)}>Make a Reservation</button>
+
       <div className="table-grid">
         {tables.map((table) => (
           <div key={table.id} className={`table-card ${table.status}`}>
             <h3>Table {table.id}</h3>
             <p>Status: <strong>{table.status.toUpperCase()}</strong></p>
             <p>Waiter: {table.waiter || "None Assigned"}</p>
-            {/* {table.status === "reserved" && <p>Reserved for: {table.reservation.name}</p>}
-            {table.status === "taken" && <p>Guests: {table.guests}</p>} */}
+            <p>Guests: <strong>{table.guests > 0 ? table.guests : "Not Specified"}</strong></p>
+
+            {table.reservation && (
+              <>
+                <p>Reserved for: {table.reservation.name}</p>
+                <p>Time: {table.reservation.time}</p>
+              </>
+            )}
 
             <button className="primary" onClick={() => setSelectedTable(table)}>View Details</button>
           </div>
@@ -48,6 +69,14 @@ function TableOverview() {
           updateWaiter={updateWaiter}
           updateTableStatus={updateTableStatus}
           />
+      )}
+
+      {showReservationForm && (
+        <ReservationForm
+          tables={tables}
+          onClose={() => setShowReservationForm(false)}
+          addReservation={addReservation}
+        />
       )}
     </div>
   );

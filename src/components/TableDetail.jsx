@@ -31,7 +31,7 @@ function TableDetails ({table, onClose, updateWaiter, updateTableStatus}){
                 <div className="divGeneral">
                     <h2>Table {table.id} Details</h2>
                     <p>Status: <strong>{table.status.toUpperCase()}</strong></p>
-                    <p>Guests: {table.guests}</p>
+                    <p>Guests: <strong>{table.guests > 0 ? table.guests : "Not Specified"}</strong></p>
                 </div>
 
                 <div className="divReservation">
@@ -41,6 +41,7 @@ function TableDetails ({table, onClose, updateWaiter, updateTableStatus}){
                         <p>Name: {table.reservation.name}</p>
                         <p>Time: {table.reservation.time}</p>
                         <p>Contact: {table.reservation.phone}</p>
+                        <p>Email: {table.reservation.email}</p>
                     </>
                     )}
                 </div>
