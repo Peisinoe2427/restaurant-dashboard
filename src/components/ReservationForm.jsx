@@ -3,21 +3,16 @@
 import React, { useState } from "react";
 import { createPortal } from "react-dom";
 
-function ReservationForm({ tables, onClose, addReservation }) {
+function ReservationForm({ onClose, addReservation }) {
   const [name, setName] = useState("");
   const [phone, setPhone] = useState("");
+  const [email, setEmail] = useState("");
   const [time, setTime] = useState("");
-  const [selectedTable, setSelectedTable] = useState("");
   const [numPeople, setNumPeople] = useState(1);
-
-  if (!tables) {
-    console.error("Error: tables is undefined in ReservationForm");
-    return null; 
-  }
 
   const handleSubmit = (event) => {
     event.preventDefault();
-    if (!name || !phone || !time || !selectedTable || numPeople < 1) {
+    if (!name || !phone || !email|| !time || numPeople < 1) {
       alert("Please fill in all fields.");
       return;
     }
@@ -25,11 +20,12 @@ function ReservationForm({ tables, onClose, addReservation }) {
     const reservationDetails = {
       name,
       phone,
+      email,
       time,
       guests: parseInt(numPeople, 10),
     };
 
-    addReservation(parseInt(selectedTable), reservationDetails);
+    addReservation(reservationDetails);
     onClose();
   };
 
@@ -47,6 +43,10 @@ function ReservationForm({ tables, onClose, addReservation }) {
                     <input type="tel" value={phone} onChange={(e) => setPhone(e.target.value)} required />
                 </label>
                 <label>
+                  Email:
+                  <input type="email" value={email} onChange={(e) => setEmail(e.target.value)} required />
+                </label>
+                <label>
                     Time:
                     <input type="time" value={time} onChange={(e) => setTime(e.target.value)} required />
                 </label>
@@ -59,19 +59,6 @@ function ReservationForm({ tables, onClose, addReservation }) {
                         min="1"
                         required
                     />
-                </label>
-                <label>
-                    Select Table:
-                    <select value={selectedTable} onChange={(e) => setSelectedTable(e.target.value)} required>
-                      <option value="">-- Choose a Table --</option>
-                      {tables
-                        .filter((table) => table.status === "free")
-                        .map((table) => (
-                          <option key={table.id} value={table.id}>
-                            Table {table.id}
-                          </option>
-                        ))}
-                    </select>
                 </label>
                 <button type="submit">Reserve</button>
                 <button type="button" onClick={onClose}>Cancel</button>

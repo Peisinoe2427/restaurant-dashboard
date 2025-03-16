@@ -2,7 +2,7 @@
 
 import React, { useState, useEffect } from "react";
 import { tablesData, reservationsData } from "../data/tablesData";
-import TableDetails from "./TableDetail";
+import ReservationDetails from "./ReservationDetails";
 import ReservationForm from "./ReservationForm";
 import Sidebar from "./Sidebar";
 import AssignWalkInForm from "./AssignWalkInForm";
@@ -10,9 +10,9 @@ import AssignWalkInForm from "./AssignWalkInForm";
 function TableOverview() {
   const [tables, setTables] = useState(tablesData);
   const [reservations, setReservations] = useState(reservationsData);
-  const [selectedTable, setSelectedTable] = useState(null);
   const [showReservationForm, setShowReservationForm] = useState(false);
   const [assignTable, setAssignTable] = useState(null);
+  const [selectedReservation, setSelectedReservation] = useState(null);
 
   const getCurrentTime = () => {
     const now = new Date();
@@ -27,6 +27,12 @@ function TableOverview() {
     return endTime.toTimeString().substring(0, 5);
   };
 
+  const addReservation = (newReservation) => {
+    setReservations((prevReservations) => [
+      ...prevReservations,
+      { ...newReservation, id: prevReservations.length + 1, assignedTable: null },
+    ]);
+  };
   const assignReservationToTable = (reservation) => {
     const availableTable = tables.find((table) => table.status === "free");
     if (!availableTable) {
@@ -72,31 +78,25 @@ function TableOverview() {
     setAssignTable(null);
   };
 
-  const updateTableStatus = (tableId, newStatus) => {
-  setTables((prevTables) =>
-    prevTables.map((table) => {
-      if (table.id === tableId) {
-
-        return {
-          ...table,
-          status: newStatus,
-          guests: newStatus === "free" ? 0 : table.guests, 
-          waiter: newStatus === "free" ? null : table.waiter, 
-          beenHereSince: newStatus === "free" ? null : table.beenHereSince, 
-          willBeFreeAt: newStatus === "free" ? null : table.willBeFreeAt, 
-        };
-      }
-      return table;
-    })
-  );
-};
-
-  const updateWaiter = (tableId, newWaiter) => {
+  const clearTable = (tableId) => {
     setTables((prevTables) =>
       prevTables.map((table) =>
         table.id === tableId
-          ? { ...table, waiter: newWaiter }
+          ? {
+              ...table,
+              status: "free",
+              guests: 0,
+              waiter: null,
+              beenHereSince: null,
+              willBeFreeAt: null,
+              }
           : table
+      )
+    );
+
+    setReservations((prevReservations) =>
+      prevReservations.map((res) =>
+        res.assignedTable === tableId ? { ...res, assignedTable: null } : res
       )
     );
   };
@@ -128,40 +128,49 @@ function TableOverview() {
   return (
     <div className="dashboard">
       <Sidebar reservations={reservations} assignReservationToTable={assignReservationToTable} />
+      
 
-      <div className="table-overview">
-        <h2>Table Overview</h2>
-        <button onClick={() => setShowReservationForm(true)}>Make a Reservation</button>
+      <div className="table-grid">
+        <div>
+          <h2>Table Overview</h2>
+          <button onClick={() => setShowReservationForm(true)}>Make a Reservation</button>
+        </div>
+        
 
-        <div className="table-grid">
-          {tables.map((table) => (
+        {tables.map((table) => {
+          const reservation = reservations.find(res => res.assignedTable === table.id);
+          return (
             <div key={table.id} className={`table-card ${table.status}`}>
               <h3>Table {table.id}</h3>
               <p>Status: <strong>{table.status.toUpperCase()}</strong></p>
               <p>Guests: <strong>{table.guests > 0 ? table.guests : "Not Specified"}</strong></p>
               {table.beenHereSince && <p>Been Here Since: {table.beenHereSince}</p>}
 
+              {reservation && (
+                <button onClick={() => setSelectedReservation(reservation)}>View Reservation</button>
+              )}
+
+              {table.status !== "free" && (
+                <button onClick={() => clearTable(table.id)}>Clear Table</button>
+              )}
+
               {table.status === "free" && (
                 <button onClick={() => setAssignTable(table)}>Assign Walk-in Guests</button>
               )}
-
-              <button onClick={() => setSelectedTable(table)}>View Details</button>
             </div>
-          ))}
-        </div>
+          );
+        })}
       </div>
 
 
-      {selectedTable && (
-        <TableDetails
-          table={selectedTable}
-          onClose={() => setSelectedTable(null)}
-          updateWaiter={updateWaiter}
-          updateTableStatus={updateTableStatus}
+      {selectedReservation && (
+        <ReservationDetails
+          reservation={selectedReservation}
+          onClose={() => setSelectedReservation(null)}
         />
       )}
-      {showReservationForm && <ReservationForm tables={tables} onClose={() => setShowReservationForm(false)} />}
-        {assignTable && <AssignWalkInForm table={assignTable} onClose={() => setAssignTable(null)} assignGuestsToTable={assignGuestsToTable} />}
+      {showReservationForm && <ReservationForm tables={tables} onClose={() => setShowReservationForm(false)} addReservation={addReservation}/>}
+      {assignTable && <AssignWalkInForm table={assignTable} onClose={() => setAssignTable(null)} assignGuestsToTable={assignGuestsToTable} />}
     </div>
   );
 }
