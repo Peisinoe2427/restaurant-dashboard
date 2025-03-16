@@ -16,6 +16,14 @@ function TableOverview() {
     });
   };
 
+  const updateTableStatus = (tableId, newStatus) => {
+    setTables((prevTables) =>
+      prevTables.map((table) =>
+        table.id === tableId ? { ...table, status: newStatus } : table
+      )
+    );
+  };
+
   return (
     <div>
       <h2>Table Overview</h2>
@@ -38,6 +46,7 @@ function TableOverview() {
           table={selectedTable} 
           onClose={() => setSelectedTable(null)} 
           updateWaiter={updateWaiter}
+          updateTableStatus={updateTableStatus}
           />
       )}
     </div>

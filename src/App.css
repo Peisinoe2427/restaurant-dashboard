@@ -77,5 +77,14 @@ Things like: Page layout (header, sidebar, main content styles).
   border-radius: var(--space-xs);
   min-width: 80vw;
   max-width: 80vh;
+  overflow-y: auto;
   z-index: 1001;
+  display: grid;
+  grid-template-columns: 0.5fr 0.75fr 0.25fr;
+}
+
+.close{
+  grid-column: 3/4;
+  grid-row: 1/2;
+  max-height: 4rem;
 }
