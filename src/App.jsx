@@ -1,14 +1,13 @@
-// Manages app structure & navigation
-
 import "./App.css";
 import React from "react";
-import TableOverview from "./components/TableOverview";
+import Dashboard from "./components/Dashboard";
+
 
 function App() {
   return (
     <div>
       <h1>Restaurant Dashboard</h1>
-      <TableOverview />
+      <Dashboard />
     </div>
   );
 }

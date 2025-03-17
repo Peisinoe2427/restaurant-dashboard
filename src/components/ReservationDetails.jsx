@@ -1,4 +1,3 @@
-//Pop-up with details (orders, waiter, guests)
 import React from "react";
 import { createPortal } from "react-dom";
 

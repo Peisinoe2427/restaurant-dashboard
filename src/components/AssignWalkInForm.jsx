@@ -1,41 +1,44 @@
 import React, { useState } from "react";
 import { createPortal } from "react-dom";
 
-function AssignWalkInForm({ table, onClose, assignGuestsToTable }) {
+function AssignWalkInForm({ table, onClose, setTables }) {
     const [numGuests, setNumGuests] = useState(1);
     const [selectedWaiter, setSelectedWaiter] = useState("None");
 
     const handleSubmit = (event) => {
-    event.preventDefault();
-    if (numGuests < 1) {
-        alert("Number of guests must be at least 1.");
-        return;
-    }
-
-    assignGuestsToTable(table.id, numGuests, selectedWaiter);
-    onClose();
+        event.preventDefault();
+        setTables((prevTables) =>
+            prevTables.map((t) =>
+                t.id === table.id
+                ? {
+                    ...t,
+                    status: "taken",
+                    guests: numGuests,
+                    waiter: selectedWaiter,
+                    beenHereSince: new Date().toLocaleTimeString(),
+                    }
+                : t
+            )
+        );
+        onClose();
     };
 
     return createPortal(
     <div className="modal">
         <div className="modal-content">
-            <h2>Assign Guests to Table {table.id}</h2>
+            <h2>Assign Walk-in Guests</h2>
             <form onSubmit={handleSubmit}>
-                <label>
-                Number of Guests:
-                <input type="number" value={numGuests} onChange={(e) => setNumGuests(parseInt(e.target.value))} min="1" required />
-                </label>
-                <label>
-                Assign Waiter:
+            <label>Guests: <input type="number" value={numGuests} onChange={(e) => setNumGuests(e.target.value)} min="1" required /></label>
+            <label>Waiter:
                 <select value={selectedWaiter} onChange={(e) => setSelectedWaiter(e.target.value)}>
-                    <option value="None">None</option>
-                    <option value="Emily">Emily</option>
-                    <option value="John">John</option>
-                    <option value="Sophia">Sophia</option>
+                <option value="None">None</option>
+                <option value="Emily">Emily</option>
+                <option value="John">John</option>
+                <option value="Sophia">Sophia</option>
                 </select>
-                </label>
-                <button type="submit">Assign Guests</button>
-                <button type="button" onClick={onClose}>Cancel</button>
+            </label>
+            <button type="submit">Assign</button>
+            <button type="button" onClick={onClose}>Cancel</button>
             </form>
         </div>
     </div>,

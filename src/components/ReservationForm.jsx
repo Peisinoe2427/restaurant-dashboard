@@ -3,7 +3,7 @@
 import React, { useState } from "react";
 import { createPortal } from "react-dom";
 
-function ReservationForm({ onClose, addReservation }) {
+function ReservationForm({ onClose, setReservations }) {
   const [name, setName] = useState("");
   const [phone, setPhone] = useState("");
   const [email, setEmail] = useState("");
@@ -17,15 +17,17 @@ function ReservationForm({ onClose, addReservation }) {
       return;
     }
 
-    const reservationDetails = {
+    const newReservation = {
+      id: Date.now(),
       name,
       phone,
       email,
       time,
       guests: parseInt(numPeople, 10),
+      assignedTable: null, 
     };
 
-    addReservation(reservationDetails);
+    setReservations((prevReservations) => [...prevReservations, newReservation]);
     onClose();
   };
 
