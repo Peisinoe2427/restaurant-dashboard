@@ -23,7 +23,8 @@ function TableOverview() {
               guests: 0,
               waiter: null,
               beenHereSince: null,
-              willBeFreeAt: null,
+              total: 0,
+              order: null
               }
           : table
       )
@@ -45,7 +46,6 @@ function TableOverview() {
         setTables={setTables} 
       />
       
-
       <div className="table-grid">
         <div>
           <h2>Table Overview</h2>
@@ -54,6 +54,7 @@ function TableOverview() {
         
         <TableList
           tables={tables}
+          setTables={setTables} 
           reservations={reservations}
           setSelectedReservation={setSelectedReservation}
           clearTable={clearTable}
@@ -82,6 +83,7 @@ function TableOverview() {
           setTables={setTables} 
         />
       )}
+
     </div>
   );
 }

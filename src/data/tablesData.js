@@ -1,12 +1,11 @@
-// Pre set tables with status and reservations
-
 const tablesData = Array.from({ length: 15 }, (_, index) => ({
   id: index + 1,
   status: "free", 
   guests: 0,
   waiter: null,
   beenHereSince: null,
-  willBeFreeAt: null,
+  total: 0,
+  order: null,
 }));
 
 const reservationsData = [

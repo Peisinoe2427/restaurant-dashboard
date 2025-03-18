@@ -27,17 +27,18 @@ function AssignWalkInForm({ table, onClose, setTables }) {
         <div className="modal-content">
             <h2>Assign Walk-in Guests</h2>
             <form onSubmit={handleSubmit}>
-            <label>Guests: <input type="number" value={numGuests} onChange={(e) => setNumGuests(e.target.value)} min="1" required /></label>
-            <label>Waiter:
-                <select value={selectedWaiter} onChange={(e) => setSelectedWaiter(e.target.value)}>
-                <option value="None">None</option>
-                <option value="Emily">Emily</option>
-                <option value="John">John</option>
-                <option value="Sophia">Sophia</option>
-                </select>
-            </label>
-            <button type="submit">Assign</button>
-            <button type="button" onClick={onClose}>Cancel</button>
+                <label>Guests: <input type="number" value={numGuests} onChange={(e) => setNumGuests(e.target.value)} min="1" required /></label>
+                <label>Waiter:
+                    <select value={selectedWaiter} onChange={(e) => setSelectedWaiter(e.target.value)}>
+                        <option value="None">None</option>
+                        <option value="Emily">Emily</option>
+                        <option value="John">John</option>
+                        <option value="Sophia">Sophia</option>
+                    </select>
+                </label>
+                
+                <button type="submit">Assign</button>
+                <button type="button" onClick={onClose}>Cancel</button>
             </form>
         </div>
     </dialog>
