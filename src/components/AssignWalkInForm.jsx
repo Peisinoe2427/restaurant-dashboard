@@ -1,5 +1,4 @@
 import React, { useState } from "react";
-import { createPortal } from "react-dom";
 
 function AssignWalkInForm({ table, onClose, setTables }) {
     const [numGuests, setNumGuests] = useState(1);
@@ -23,8 +22,8 @@ function AssignWalkInForm({ table, onClose, setTables }) {
         onClose();
     };
 
-    return createPortal(
-    <div className="modal">
+    return (
+    <dialog className="modal">
         <div className="modal-content">
             <h2>Assign Walk-in Guests</h2>
             <form onSubmit={handleSubmit}>
@@ -41,8 +40,7 @@ function AssignWalkInForm({ table, onClose, setTables }) {
             <button type="button" onClick={onClose}>Cancel</button>
             </form>
         </div>
-    </div>,
-    document.getElementById("modal-root")
+    </dialog>
     );
 }
 

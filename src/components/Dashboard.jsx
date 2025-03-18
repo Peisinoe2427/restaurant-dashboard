@@ -1,6 +1,5 @@
-import React, { useState, useEffect } from "react";
+import  { useState } from "react";
 import { tablesData, reservationsData } from "../data/tablesData";
-import { updateTablesWithReservations } from "../utility";
 import ReservationDetails from "./ReservationDetails";
 import ReservationForm from "./ReservationForm";
 import Sidebar from "./Sidebar";
@@ -13,7 +12,6 @@ function TableOverview() {
   const [showReservationForm, setShowReservationForm] = useState(false);
   const [assignTable, setAssignTable] = useState(null);
   const [selectedReservation, setSelectedReservation] = useState(null);
-
 
   const clearTable = (tableId) => {
     setTables((prevTables) =>
@@ -37,14 +35,6 @@ function TableOverview() {
       )
     );
   };
-
-  useEffect(() => {
-  const interval = setInterval(() => {
-    setTables((prevTables) => updateTablesWithReservations(prevTables, reservations));
-  }, 60000);
-
-  return () => clearInterval(interval);
-}, [reservations]);
 
   return (
     <div className="dashboard">
@@ -71,18 +61,17 @@ function TableOverview() {
         />
       </div>
 
+      {showReservationForm && (
+        <ReservationForm 
+          onClose={() => setShowReservationForm(false)} 
+          setReservations={setReservations} 
+        />
+      )}
 
       {selectedReservation && (
         <ReservationDetails
           reservation={selectedReservation}
           onClose={() => setSelectedReservation(null)}
-        />
-      )}
-
-      {showReservationForm && (
-        <ReservationForm 
-          onClose={() => setShowReservationForm(false)} 
-          setReservations={setReservations} 
         />
       )}
 

@@ -1,12 +1,11 @@
 import React from "react";
-import { createPortal } from "react-dom";
 
 
-function TableDetails ({reservation, onClose}){
+function ReservationDetails ({reservation, onClose}){
     if (!reservation) return null;
 
-    return createPortal(
-        <div className="modal">
+    return (
+        <dialog className="modal">
             <div className="modal-content">
                 <button onClick={onClose} className="secondary close">Close</button>
 
@@ -17,9 +16,8 @@ function TableDetails ({reservation, onClose}){
                 <p><strong>Contact:</strong> {reservation.phone}</p>
                 <p><strong>Email:</strong> {reservation.email}</p>
             </div>
-        </div>,
-        document.getElementById("modal-root")
+        </dialog>
     );
 }
 
-export default TableDetails;
+export default ReservationDetails;

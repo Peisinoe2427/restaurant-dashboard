@@ -1,7 +1,4 @@
-// Add, move, or cancel reservations
-
 import React, { useState } from "react";
-import { createPortal } from "react-dom";
 
 function ReservationForm({ onClose, setReservations }) {
   const [name, setName] = useState("");
@@ -31,8 +28,8 @@ function ReservationForm({ onClose, setReservations }) {
     onClose();
   };
 
-  return createPortal(
-    <div className="modal">
+  return(
+    <dialog className="modal">
         <div className="modal-content">
             <h2>Make a Reservation</h2>
             <form onSubmit={handleSubmit}>
@@ -66,8 +63,7 @@ function ReservationForm({ onClose, setReservations }) {
                 <button type="button" onClick={onClose}>Cancel</button>
             </form>
       </div>
-    </div>,
-    document.getElementById("modal-root")
+    </dialog>
   );
 }
 
