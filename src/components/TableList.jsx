@@ -1,4 +1,3 @@
-import React from "react";
 
 function TableList({ tables, reservations, setSelectedReservation, clearTable, setAssignTable }) {
     return (

@@ -1,5 +1,3 @@
-import React from "react";
-
 
 function ReservationDetails ({reservation, onClose}){
     if (!reservation) return null;

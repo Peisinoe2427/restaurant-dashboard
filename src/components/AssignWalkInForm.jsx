@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import { useState } from "react";
 
 function AssignWalkInForm({ table, onClose, setTables }) {
     const [numGuests, setNumGuests] = useState(1);
