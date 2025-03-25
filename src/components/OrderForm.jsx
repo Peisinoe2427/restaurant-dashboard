@@ -36,17 +36,22 @@ function OrderForm ({onClose, saveOrder}){
                 <h2>Place an Order</h2>
                 <form onSubmit={handleSubmit}>
                     <h3>Menu</h3>
-                    {menuData.map((item) => (
-                        <div key={item.id} className="menu-item">
-                            <span>{item.name} - ${item.price}</span>
-                            <button type="button" onClick={() => handleQuantityChange(item, -1)}>-</button>
-                            <span>{order[item.id] || 0}</span>
-                            <button type="button" onClick={() => handleQuantityChange(item, 1)}>+</button>
-                        </div>
-                    ))}
+                    <div className="menu__container">
+                        {menuData.map((item) => (
+                            <div key={item.id} className="menu__item">
+                                <span>{item.name} - ${item.price}</span>
+                                <button type="button" onClick={() => handleQuantityChange(item, -1)}>-</button>
+                                <span>{order[item.id] || 0}</span>
+                                <button type="button" onClick={() => handleQuantityChange(item, 1)}>+</button>
+                            </div>
+                        ))}
+                    </div>
 
-                    <button type="submit">Place Order</button>
-                    <button type="button" onClick={onClose}>Cancel</button>
+
+                    <div className="container__button">
+                        <button type="submit">Place Order</button>
+                        <button type="button" onClick={onClose}>Cancel</button>
+                    </div>
                 </form>
             </div>
         </dialog>

@@ -8,8 +8,8 @@ function TableList({ tables,setTables, reservations, setSelectedReservation, cle
     const saveOrderToTable = (tableId, order) => {
         setTables((prevTables) =>
             prevTables.map((table) =>
-                table.id === tableId
-                ? { ...table, order: order.items, total: order.total } 
+            table.id === tableId
+                ? { ...table, order: order.items, total: order.total }
                 : table
             )
         );
@@ -22,7 +22,8 @@ function TableList({ tables,setTables, reservations, setSelectedReservation, cle
                 const reservation = reservations.find(res => res.assignedTable === table.id);
 
                 return (
-                <div key={table.id} className={`table-card ${table.status}`}>
+                <div key={table.id} className={`table__card ${table.status} size-${table.maxGuests} ${reservation?.celebration ? 'celebration' : ''}`}>
+
                     <h3>Table {table.id}</h3>
                     <p>Status: <strong>{table.status.toUpperCase()}</strong></p>
                     <p>Guests: <strong>{table.guests > 0 ? table.guests : "Not Specified"}</strong></p>
@@ -50,7 +51,7 @@ function TableList({ tables,setTables, reservations, setSelectedReservation, cle
                     {activeTable === table.id && (
                         <OrderForm 
                             onClose={() => setActiveTable(null)}
-                            saveOrder={(order, total) => saveOrderToTable(table.id, order, total)}
+                            saveOrder={(order) => saveOrderToTable(table.id, order)}
                         />
                     )}
                 </div>

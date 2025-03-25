@@ -1,6 +1,8 @@
 function Sidebar({ reservations,  setReservations, tables, setTables }) {
     const assignReservationToTable = (reservation) => {
-        const availableTable = tables.find((table) => table.status === "free");
+        const availableTable = tables.find(
+            (table) => table.status === "free" && table.maxGuests >= reservation.guests
+        );
         if (!availableTable) {
             alert("No free tables available!");
             return;
@@ -29,20 +31,17 @@ function Sidebar({ reservations,  setReservations, tables, setTables }) {
     <div className="sidebar">
         <h2>Reservations</h2>
 
-        {reservations.map((res) => (
-            res.assignedTable ? null : (
+        {reservations
+            .filter((res) => !res.assignedTable)
+            .map((res) => (
                 <div key={res.id} className="reservation-card">
                     <p><strong>{res.name}</strong></p>
                     <p>Time: {res.time}</p>
                     <p>Guests: {res.guests}</p>
-                    {res.assignedTable ? (
-                    <p>Table: {res.assignedTable}</p>
-                    ) : (
                     <button onClick={() => assignReservationToTable(res)}>Assign to Table</button>
-                    )}
                 </div>
-            )
-        ))}
+            ))
+        }
     </div>
     );
 }

@@ -39,10 +39,10 @@ Things like: Page layout (header, sidebar, main content styles).
   flex-grow: 1;
 }
 .table-grid {
-  display: grid;
-  grid-template-columns: repeat(3, 1fr);
+  display: flex;
+  flex-wrap: wrap;
   gap: var(--space-m);
-  margin-top: var(--space-s);
+  margin-top: var(--space-xs);
 }
 .table-card {
   border: var(--space-xs) solid var(--greyM);
@@ -52,18 +52,54 @@ Things like: Page layout (header, sidebar, main content styles).
   transition: 0.3s;
 }
 
-
 .sidebar {
   max-width: 20vw;
-  background: #f4f4f4;
-  padding-inline: 2rem;
-  padding-block: 1rem;
+  background: var(--white);
+  padding-inline: var(--space-l);
+  padding-block: var(--space-s);
 }
 .reservation-card {
   background-color: #ffa09d;
   padding: var(--space-xs);
 }
 
+form {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-xs);
+}
+
+label {
+  display: flex;
+  flex-direction: column;
+  font-weight: bold;
+}
+
+input{
+  padding: 0.3rem;
+  font-size: var(--fs-02);
+  background-color: lightgray;
+}
+.container__button{
+  display: flex;
+  gap: var(--space-m);
+}
+
+.form__res{
+  grid-row: 2/3;
+}
+
+.form__res, .titleForm{
+  grid-column: 2/3;
+}
+.menu__container{
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: var(--space-s);
+}
+
+/* VISUAL */
 .free {
   background-color: #9fd8ac;
 }
@@ -75,6 +111,8 @@ Things like: Page layout (header, sidebar, main content styles).
 .reserved {
   background-color: #f89a9f;
 }
+
+
 
 .modal {
   position: fixed;
@@ -105,4 +143,45 @@ Things like: Page layout (header, sidebar, main content styles).
   grid-column: 3/4;
   grid-row: 1/2;
   max-height: 4rem;
+}
+.table__card{
+  padding: var(--space-xs);
+}
+.size-2 {
+  transform: scale(0.9);
+}
+
+.size-4 {
+  transform: scale(1.1);
+}
+.table__card.celebration {
+  border: var(--fs-02) solid transparent;
+  animation: rainbow-border 3s linear infinite;
+}
+
+@keyframes rainbow-border {
+  0% {
+    border-color: red;
+  }
+  16% {
+    border-color: orange;
+  }
+  33% {
+    border-color: yellow;
+  }
+  50% {
+    border-color: green;
+  }
+  66% {
+    border-color: blue;
+  }
+  83% {
+    border-color: rgb(135, 50, 195);
+  }
+  90% {
+    border-color: rgb(255, 107, 136);
+  }
+  100% {
+    border-color: red;
+  }
 }

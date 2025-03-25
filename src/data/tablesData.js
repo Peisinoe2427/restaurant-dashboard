@@ -1,4 +1,4 @@
-const tablesData = Array.from({ length: 15 }, (_, index) => ({
+const tablesData = [2, 2, 2, 2, 4, 4, 4, 4].map((maxGuests, index)  => ({
   id: index + 1,
   status: "free", 
   guests: 0,
@@ -6,6 +6,7 @@ const tablesData = Array.from({ length: 15 }, (_, index) => ({
   beenHereSince: null,
   total: 0,
   order: null,
+  maxGuests,
 }));
 
 const reservationsData = [

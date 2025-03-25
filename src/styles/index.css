@@ -106,8 +106,7 @@ button {
   padding-inline: var(--space-s);
   border-style: none;
   font-weight: 800;
-  margin-inline-end: var(--space-xxs);
-  margin-block-start: var(--space-xxs);
+  margin-block: var(--space-xs);
   max-width: fit-content;
 }
 .primary {
@@ -122,9 +121,6 @@ button:hover {
   border-style: double;
   border-color: #22334A;
 }
-/* button:focus,
-button:focus-visible {
-  outline: 4px auto -webkit-focus-ring-color;
-} */
+
 
 

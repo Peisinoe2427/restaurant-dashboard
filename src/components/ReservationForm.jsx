@@ -6,6 +6,7 @@ function ReservationForm({ onClose, setReservations }) {
   const [email, setEmail] = useState("");
   const [time, setTime] = useState("");
   const [numPeople, setNumPeople] = useState(1);
+  const [celebration, setCelebration] = useState(false);
 
   const handleSubmit = (event) => {
     event.preventDefault();
@@ -22,6 +23,7 @@ function ReservationForm({ onClose, setReservations }) {
       time,
       guests: parseInt(numPeople, 10),
       assignedTable: null, 
+      celebration,
     };
 
     setReservations((prevReservations) => [...prevReservations, newReservation]);
@@ -31,8 +33,8 @@ function ReservationForm({ onClose, setReservations }) {
   return(
     <dialog className="modal">
         <div className="modal-content">
-            <h2>Make a Reservation</h2>
-            <form onSubmit={handleSubmit}>
+            <h2 className="titleForm">Make a Reservation</h2>
+            <form onSubmit={handleSubmit} className="form__res">
                 <label>
                     Name:
                     <input type="text" value={name} onChange={(e) => setName(e.target.value)} required />
@@ -59,8 +61,17 @@ function ReservationForm({ onClose, setReservations }) {
                         required
                     />
                 </label>
-                <button type="submit">Reserve</button>
-                <button type="button" onClick={onClose}>Cancel</button>
+                <label>
+                  <input
+                    type="checkbox"
+                    checked={celebration}
+                    onChange={() => setCelebration(!celebration)}
+                  /> 🎉 Is this a celebration?
+                </label>
+                <div className="container__button">
+                  <button type="submit">Reserve</button>
+                  <button type="button" onClick={onClose}>Cancel</button>
+                </div>
             </form>
       </div>
     </dialog>

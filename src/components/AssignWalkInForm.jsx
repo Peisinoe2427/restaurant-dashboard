@@ -6,13 +6,20 @@ function AssignWalkInForm({ table, onClose, setTables }) {
 
     const handleSubmit = (event) => {
         event.preventDefault();
+        const guestsNumber = parseInt(numGuests, 10);
+
+        if (guestsNumber > table.maxGuests) {
+            alert(`This table only seats up to ${table.maxGuests} guests.`);
+            return;
+        }
+
         setTables((prevTables) =>
             prevTables.map((t) =>
                 t.id === table.id
                 ? {
                     ...t,
                     status: "taken",
-                    guests: numGuests,
+                    guests: guestsNumber,
                     waiter: selectedWaiter,
                     beenHereSince: new Date().toLocaleTimeString(),
                     }
@@ -27,7 +34,7 @@ function AssignWalkInForm({ table, onClose, setTables }) {
         <div className="modal-content">
             <h2>Assign Walk-in Guests</h2>
             <form onSubmit={handleSubmit}>
-                <label>Guests: <input type="number" value={numGuests} onChange={(e) => setNumGuests(e.target.value)} min="1" required /></label>
+                <label>Guests: <input type="number" value={numGuests} onChange={(e) => setNumGuests(e.target.value)} min="1" max={table.maxGuests} required /></label>
                 <label>Waiter:
                     <select value={selectedWaiter} onChange={(e) => setSelectedWaiter(e.target.value)}>
                         <option value="None">None</option>
@@ -36,9 +43,10 @@ function AssignWalkInForm({ table, onClose, setTables }) {
                         <option value="Sophia">Sophia</option>
                     </select>
                 </label>
-                
-                <button type="submit">Assign</button>
-                <button type="button" onClick={onClose}>Cancel</button>
+                <div className="container__button">
+                    <button type="submit">Assign</button>
+                    <button type="button" onClick={onClose}>Cancel</button>
+                </div>
             </form>
         </div>
     </dialog>

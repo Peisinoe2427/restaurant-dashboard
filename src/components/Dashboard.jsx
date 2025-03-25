@@ -6,7 +6,7 @@ import Sidebar from "./Sidebar";
 import AssignWalkInForm from "./AssignWalkInForm";
 import TableList from "./TableList";
 
-function TableOverview() {
+function Dashboard() {
   const [tables, setTables] = useState(tablesData);
   const [reservations, setReservations] = useState(reservationsData);
   const [showReservationForm, setShowReservationForm] = useState(false);
@@ -88,4 +88,4 @@ function TableOverview() {
   );
 }
 
-export default TableOverview;
+export default Dashboard;
