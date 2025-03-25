@@ -99,6 +99,7 @@ input{
   gap: var(--space-s);
 }
 
+
 /* VISUAL */
 .free {
   background-color: #9fd8ac;
@@ -111,8 +112,6 @@ input{
 .reserved {
   background-color: #f89a9f;
 }
-
-
 
 .modal {
   position: fixed;

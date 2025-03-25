@@ -7,12 +7,17 @@ function ReservationDetails ({reservation, onClose}){
             <div className="modal-content">
                 <button onClick={onClose} className="secondary close">Close</button>
 
-                <h2>Reservation Details</h2>
-                <p><strong>Name:</strong> {reservation.name}</p>
-                <p><strong>Time:</strong> {reservation.time}</p>
-                <p><strong>Guests:</strong> {reservation.guests}</p>
-                <p><strong>Contact:</strong> {reservation.phone}</p>
-                <p><strong>Email:</strong> {reservation.email}</p>
+                <div>
+                    <h2>Reservation Details</h2>
+                    <ul>
+                        <li><strong>Name:</strong> {reservation.name}</li>
+                        <li><strong>Time:</strong> {reservation.time}</li>
+                        <li><strong>Guests:</strong> {reservation.guests}</li>
+                        <li><strong>Contact:</strong> {reservation.phone}</li>
+                        <li><strong>Email:</strong> {reservation.email}</li>
+                    </ul>
+                </div>
+                
             </div>
         </dialog>
     );
