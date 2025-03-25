@@ -5,6 +5,7 @@ import ReservationForm from "./ReservationForm";
 import Sidebar from "./Sidebar";
 import AssignWalkInForm from "./AssignWalkInForm";
 import TableList from "./TableList";
+import OrderForm from "./OrderForm";
 
 function Dashboard() {
   const [tables, setTables] = useState(tablesData);
@@ -12,7 +13,20 @@ function Dashboard() {
   const [showReservationForm, setShowReservationForm] = useState(false);
   const [assignTable, setAssignTable] = useState(null);
   const [selectedReservation, setSelectedReservation] = useState(null);
+  const [activeTable, setActiveTable] = useState(null);
 
+  
+    const saveOrderToTable = (tableId, order) => {
+      setTables((prevTables) =>
+        prevTables.map((table) =>
+        table.id === tableId
+          ? { ...table, order: order.items, total: order.total }
+          : table
+        )
+      );
+      setActiveTable(null);
+    };
+  
   const clearTable = (tableId) => {
     setTables((prevTables) =>
       prevTables.map((table) =>
@@ -53,12 +67,12 @@ function Dashboard() {
         </div>
         
         <TableList
-          tables={tables}
-          setTables={setTables} 
+          tables={tables} 
           reservations={reservations}
           setSelectedReservation={setSelectedReservation}
           clearTable={clearTable}
           setAssignTable={setAssignTable}
+          setActiveTable={setActiveTable}
         />
       </div>
 
@@ -81,6 +95,13 @@ function Dashboard() {
           table={assignTable} 
           onClose={() => setAssignTable(null)} 
           setTables={setTables} 
+        />
+      )}
+
+      {activeTable && (
+        <OrderForm
+          onClose={() => setActiveTable(null)}
+          saveOrder={(order) => saveOrderToTable(activeTable, order)}
         />
       )}
 

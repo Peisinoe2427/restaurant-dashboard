@@ -1,21 +1,6 @@
-import { useState } from "react";
-import OrderForm from "./OrderForm";
 
-
-function TableList({ tables,setTables, reservations, setSelectedReservation, clearTable, setAssignTable }) {
-    const [activeTable, setActiveTable] = useState(null);
-
-    const saveOrderToTable = (tableId, order) => {
-        setTables((prevTables) =>
-            prevTables.map((table) =>
-            table.id === tableId
-                ? { ...table, order: order.items, total: order.total }
-                : table
-            )
-        );
-        setActiveTable(null);
-    };
-
+function TableList({ tables, reservations, setSelectedReservation, clearTable, setAssignTable, setActiveTable }) {
+    
     return (
         <div className="table-grid">
             {tables.map((table) => {
@@ -46,13 +31,6 @@ function TableList({ tables,setTables, reservations, setSelectedReservation, cle
 
                     {table.total > 0 && (
                         <p><strong>Total Order: ${table.total}</strong></p>
-                    )}
-
-                    {activeTable === table.id && (
-                        <OrderForm 
-                            onClose={() => setActiveTable(null)}
-                            saveOrder={(order) => saveOrderToTable(table.id, order)}
-                        />
                     )}
                 </div>
             );
