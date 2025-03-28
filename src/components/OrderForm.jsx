@@ -5,10 +5,14 @@ function OrderForm ({onClose, saveOrder}){
     const [order, setOrder] = useState({});
 
     const handleQuantityChange = (item, change) => {
-        setOrder((prevOrder)=>({
-            ...prevOrder,
-            [item.id]: Math.max(0, (prevOrder[item.id] || 0) + change),
-        }));
+        setOrder((prevOrder)=>{
+            const currentQuantity = prevOrder[item.id] || 0;
+            const newQuantity= Math.max(0, currentQuantity+ change)
+            return{
+                ...prevOrder,
+                [item.id]:newQuantity,
+            };
+        });
     }
 
     const handleSubmit = (event) => {
@@ -19,14 +23,15 @@ function OrderForm ({onClose, saveOrder}){
             .map((item) => ({ ...item, quantity: order[item.id] })); 
 
         if (selectedItems.length === 0) {
-            alert("Please select at least one item.");
+            alert(" Select at least one item.");
             return;
         }
 
+        // based on this: https://medium.com/@anandgupta20588/how-to-use-reduce-method-to-add-the-prices-of-cart-items-in-js-abb81a930883
         const total = selectedItems.reduce((sum, item) => sum + item.price * item.quantity, 0);
 
         saveOrder({items: selectedItems, total});
-        alert(`Order placed successfully! Total: $${total}`);
+        alert(`Order placed successfully! Total is €${total}`);
         onClose();
     }
 

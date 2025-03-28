@@ -1,10 +1,10 @@
 function Sidebar({ reservations,  setReservations, tables, setTables }) {
     const assignReservationToTable = (reservation) => {
         const availableTable = tables.find(
-            (table) => table.status === "free" && table.maxGuests >= reservation.guests
+            (tableItem) => tableItem.status === "free" && tableItem.maxGuests >= reservation.guests
         );
         if (!availableTable) {
-            alert("No free tables available!");
+            alert("Congrats, all your tables are filled, sorry new guest, time to wait...");
             return;
         }
         setTables((prevTables) =>
@@ -15,14 +15,13 @@ function Sidebar({ reservations,  setReservations, tables, setTables }) {
                     status: "taken",
                     guests: reservation.guests,
                     beenHereSince: new Date().toLocaleTimeString(),
-                    willBeFreeAt: new Date(Date.now() + 150 * 60000).toLocaleTimeString(),
                 }
                 : table
             )
         );
         setReservations((prevReservations) =>
-            prevReservations.map((res) =>
-            res.id === reservation.id ? { ...res, assignedTable: availableTable.id } : res
+            prevReservations.map((updatedRes) =>
+            updatedRes.id === reservation.id ? { ...updatedRes, assignedTable: availableTable.id } : updatedRes
             )
         );
     };

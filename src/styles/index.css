@@ -4,12 +4,6 @@ CSS resets or base styles. Global typography (headings, paragraphs, links).
 Utility classes that might be used across multiple components. */
 
 :root {
-  --sans-serif: 'sen', sans-serif;
-  font-synthesis: none;
-  text-rendering: optimizeLegibility;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-
   --fs-03: clamp(0.5787rem, 0.5583rem + 0.0908vw, 0.64rem);
   --fs-02: clamp(0.6944rem, 0.6593rem + 0.1564vw, 0.8rem);
   --fs-01: clamp(0.8333rem, 0.7778rem + 0.2469vw, 1rem);
@@ -62,22 +56,13 @@ img {
   width: 1px;
 }
 
-/* LINKS */
-a {
-  font-weight: 500;
-  color: #646cff;
-  text-decoration: inherit;
-}
-a:hover {
-  color: #0c7bba;
-}
-
 
 /* TYPO */
 body {
   color: var(--black);
   font-size: var(--fs-0);
-  font-family: var(--sans-serif);
+  font-family:Arial, Helvetica, sans-serif;
+  font-weight: 700;
 }
 h1 {
   font-size: var(--fs-4);
@@ -89,7 +74,7 @@ h2 {
 }
 h3 {
   font-size: var(--fs-2);
-  padding-block-end: var(--space-xxs);
+  padding-block-end: var(--space-xs);
 }
 h4 {
   font-size: var(--fs-1);
@@ -104,19 +89,13 @@ button {
   border-radius: var(--space-xs);
   padding-block: var(--space-xs);
   padding-inline: var(--space-s);
+  margin-inline: var(--space-s);
   border-style: none;
   font-weight: 800;
   margin-block: var(--space-xs);
   max-width: fit-content;
 }
-.primary {
-  background-color: var(--blue);
-  color: var(--black);
-}
-.secondary {
-  background-color: var(--darkBlue);
-  color: var(--white);
-}
+
 button:hover {
   border-style: double;
   border-color: #22334A;

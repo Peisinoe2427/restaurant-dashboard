@@ -1,4 +1,4 @@
-import  { useState } from "react";
+import  { useState} from "react";
 import { tablesData, reservationsData } from "../data/tablesData";
 import ReservationDetails from "./ReservationDetails";
 import ReservationForm from "./ReservationForm";
@@ -15,13 +15,12 @@ function Dashboard() {
   const [selectedReservation, setSelectedReservation] = useState(null);
   const [activeTable, setActiveTable] = useState(null);
 
-  
     const saveOrderToTable = (tableId, order) => {
       setTables((prevTables) =>
-        prevTables.map((table) =>
-        table.id === tableId
-          ? { ...table, order: order.items, total: order.total }
-          : table
+        prevTables.map((updatedTable) =>
+        updatedTable.id === tableId
+          ? { ...updatedTable, order: order.items, total: order.total }
+          : updatedTable
         )
       );
       setActiveTable(null);
@@ -29,10 +28,10 @@ function Dashboard() {
   
   const clearTable = (tableId) => {
     setTables((prevTables) =>
-      prevTables.map((table) =>
-        table.id === tableId
+      prevTables.map((updatedTable) =>
+        updatedTable.id=== tableId
           ? {
-              ...table,
+              ... updatedTable,
               status: "free",
               guests: 0,
               waiter: null,
@@ -40,13 +39,13 @@ function Dashboard() {
               total: 0,
               order: null
               }
-          : table
+          :updatedTable
       )
     );
 
     setReservations((prevReservations) =>
-      prevReservations.map((res) =>
-        res.assignedTable === tableId ? { ...res, assignedTable: null } : res
+      prevReservations.map((updatedRes) =>
+        updatedRes.assignedTable ===tableId ? { ...updatedRes, assignedTable: null } :updatedRes
       )
     );
   };

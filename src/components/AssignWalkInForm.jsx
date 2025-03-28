@@ -9,21 +9,21 @@ function AssignWalkInForm({ table, onClose, setTables }) {
         const guestsNumber = parseInt(numGuests, 10);
 
         if (guestsNumber > table.maxGuests) {
-            alert(`This table only seats up to ${table.maxGuests} guests.`);
+            alert(`This table only seats up to ${table.maxGuests} guests. `);
             return;
         }
 
         setTables((prevTables) =>
-            prevTables.map((t) =>
-                t.id === table.id
+            prevTables.map((updatedTable) =>
+                updatedTable.id ===table.id
                 ? {
-                    ...t,
+                    ... updatedTable,
                     status: "taken",
                     guests: guestsNumber,
                     waiter: selectedWaiter,
                     beenHereSince: new Date().toLocaleTimeString(),
                     }
-                : t
+                : updatedTable
             )
         );
         onClose();

@@ -11,7 +11,7 @@ function ReservationForm({ onClose, setReservations }) {
   const handleSubmit = (event) => {
     event.preventDefault();
     if (!name || !phone || !email|| !time || numPeople < 1) {
-      alert("Please fill in all fields.");
+      alert("Some fields are not filled in");
       return;
     }
 
@@ -57,7 +57,7 @@ function ReservationForm({ onClose, setReservations }) {
                         type="number"
                         value={numPeople}
                         onChange={(e) => setNumPeople(e.target.value)}
-                        min="1"
+                        min="1" max ="4"
                         required
                     />
                 </label>
