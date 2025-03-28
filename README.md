@@ -14,6 +14,7 @@ This project is a simple restaurant table management system that allows staff to
 
 - React.js 
 - JavaScript
+- JSX
 - CSS 
 - Vite
 - Git and Github
@@ -26,6 +27,8 @@ This assignement had a limited amount of time and usability was not the focus, b
 - Offer bigger tables for group option
 - Offer option to erase reservations when completed
 - Offer option to assign reservation to a specific Tables.
+- Offer the assign waiter option even in the reservations.
+- Improve the overall CSS.
 #
 
 
